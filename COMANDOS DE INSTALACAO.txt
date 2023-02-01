@@ -1,0 +1,14 @@
+// BIBLIOTECA PARA INTERFACE
+npm install @mui/material 
+npm install @emotion/react 
+npm install @emotion/styled
+
+// ROTAS
+npm install react-router-dom
+
+// PARA FAZER REQUISICOES
+npm install axios
+
+// PARA EXIBIR MENSAGEM LEGAL
+npm install sweetalert2
+

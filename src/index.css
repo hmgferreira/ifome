@@ -1,0 +1,22 @@
+#banner {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+@keyframes borderAnimate {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.title::after {
+    content: "";
+    width: 100%;
+    display: block;
+    border-bottom: 5px solid red;
+    animation: borderAnimate 1s;
+}
