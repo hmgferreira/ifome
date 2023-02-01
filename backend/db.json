@@ -1,0 +1,13 @@
+{
+  "categories": [],
+  "products": [],
+  "orders": [],
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "login": "admin@admin.com.br",
+      "password": "123456"
+    }
+  ]
+}

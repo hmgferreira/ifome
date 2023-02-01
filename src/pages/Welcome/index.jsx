@@ -5,11 +5,28 @@ import pizza from '../../assets/images/pizza.png';
 import pastel from '../../assets/images/pastel.png';
 import hamburguer from '../../assets/images/hamburguer.png';
 import banner from '../../assets/images/banner.jpg';
+import { Box } from '@mui/system';
 function Welcome() {
+
+    const styles = {
+        box: {
+            width: '100%', 
+            height: '100px', 
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            padding: '10px'
+        },
+        avatar_circle: {
+            width: '80px', 
+            height: '80px',
+            marginRight: '10px'
+        }
+    };
 
     return (
         <CssBaseline>
             <div style={{ padding: '20px' }}>
+                
                 <Grid container>
                     <Grid item xs={12} md={12}>
                         <h4 className='title'>Seja bem-vindo!</h4>
@@ -20,39 +37,38 @@ function Welcome() {
                             variant='outlined'
                             placeholder='Quero comer?'
                         />
-                    </Grid>-
+                    </Grid>
                 </Grid>
-                
-                <Grid container spacing={2}>
-                    <Grid item>
+                {/* https://dontpad.com/iw */}
+                <Box sx={styles.box}>
+                    <div style={{ display: 'flex' }}>
                         <Avatar 
                             src={pizza} 
                             alt="" 
-                            sx={{ width: '80px', height: '80px' }} 
+                            sx={styles.avatar_circle} 
                         />
-                    </Grid>
-                    <Grid item>
                         <Avatar 
                             src={pastel} 
                             alt="" 
-                            sx={{ width: '80px', height: '80px' }} 
+                            sx={styles.avatar_circle} 
                         />
-                    </Grid>
-                    <Grid item>
                         <Avatar 
                             src={hamburguer} 
                             alt="" 
-                            sx={{ width: '80px', height: '80px' }} 
+                            sx={styles.avatar_circle} 
                         />
-                    </Grid>
-                    <Grid item>
                         <Avatar 
                             src={hamburguer} 
                             alt="" 
-                            sx={{ width: '80px', height: '80px' }} 
+                            sx={styles.avatar_circle} 
                         />
-                    </Grid>
-                </Grid>
+                        <Avatar 
+                            src={hamburguer} 
+                            alt="" 
+                            sx={styles.avatar_circle} 
+                        />
+                    </div>
+                </Box>
                 <Grid container>
                     <Grid>
                         <img src={banner} alt="Banner" id="banner"/>

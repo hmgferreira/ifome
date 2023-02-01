@@ -12,3 +12,11 @@ npm install axios
 // PARA EXIBIR MENSAGEM LEGAL
 npm install sweetalert2
 
+
+
+// COMANDOS PARA CONFIGURAR O PROJETO E EXECUTAR
+git clone https://github.com/hmgferreira/ifome
+
+cd ifome
+npm install
+npm run dev
