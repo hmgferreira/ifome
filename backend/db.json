@@ -1,17 +1,32 @@
 {
-  "categories": [],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Pizzas",
+      "image": ""
+    },
+    {
+      "id": 2,
+      "name": "Sanduiches",
+      "image": ""
+    }
+  ],
   "products": [
     {
       "id": 1,
       "name": "Pizza de Frango",
       "description": "Frango, Queijo, Tomate",
-      "price": 29.99
+      "price": 29.99,
+      "image": "",
+      "category_id": 1
     },
     {
       "id": 2,
       "name": "Pizza de Bacon",
       "description": "Bacon, Queijo, Tomate",
-      "price": 34.99
+      "price": 34.99,
+      "image": "",
+      "category_id": 1
     }
   ],
   "orders": [],
