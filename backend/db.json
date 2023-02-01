@@ -1,6 +1,19 @@
 {
   "categories": [],
-  "products": [],
+  "products": [
+    {
+      "id": 1,
+      "name": "Pizza de Frango",
+      "description": "Frango, Queijo, Tomate",
+      "price": 29.99
+    },
+    {
+      "id": 2,
+      "name": "Pizza de Bacon",
+      "description": "Bacon, Queijo, Tomate",
+      "price": 34.99
+    }
+  ],
   "orders": [],
   "users": [
     {
