@@ -13,10 +13,12 @@
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.11.6",
     "axios": "^1.2.4",
+    "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.7.0",
-    "sweetalert2": "^11.7.1"
+    "sweetalert2": "^11.7.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

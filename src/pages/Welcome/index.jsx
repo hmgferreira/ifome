@@ -1,4 +1,4 @@
-import { Avatar, CssBaseline, Grid, TextField } from '@mui/material';
+import { Avatar, Button, CssBaseline, Grid, TextField } from '@mui/material';
 import ListCard from '../../components/ListCard';
 import { Link } from 'react-router-dom';
 import pizza from '../../assets/images/pizza.png';
@@ -6,8 +6,15 @@ import pastel from '../../assets/images/pastel.png';
 import hamburguer from '../../assets/images/hamburguer.png';
 import banner from '../../assets/images/banner.jpg';
 import { Box } from '@mui/system';
+import { useState } from 'react';
+import api from '../../config/api';
+import { useEffect } from 'react';
+
 function Welcome() {
 
+    const[categories, setCategories] = useState([]);
+    const[banners, setBanners] = useState([]);
+    const[products, setProducts] = useState([]);
     const styles = {
         box: {
             width: '100%', 
@@ -22,6 +29,28 @@ function Welcome() {
             marginRight: '10px'
         }
     };
+
+    async function getCategories() {
+        const response = await api.get('categories');
+        setCategories(response.data);
+    }
+
+    async function getBanners() {
+        const response = await api.get('banners');
+        setBanners(response.data);
+    }
+
+    async function getProducts() {
+        const response = await api.get('products');
+        setProducts(response.data);
+    }
+
+    useEffect(() => {
+        getCategories();
+        getBanners();
+        getProducts();
+    }, []);
+
 
     return (
         <CssBaseline>
@@ -42,38 +71,24 @@ function Welcome() {
                 {/* https://dontpad.com/iw */}
                 <Box sx={styles.box}>
                     <div style={{ display: 'flex' }}>
-                        <Avatar 
-                            src={pizza} 
-                            alt="" 
-                            sx={styles.avatar_circle} 
-                        />
-                        <Avatar 
-                            src={pastel} 
-                            alt="" 
-                            sx={styles.avatar_circle} 
-                        />
-                        <Avatar 
-                            src={hamburguer} 
-                            alt="" 
-                            sx={styles.avatar_circle} 
-                        />
-                        <Avatar 
-                            src={hamburguer} 
-                            alt="" 
-                            sx={styles.avatar_circle} 
-                        />
-                        <Avatar 
-                            src={hamburguer} 
-                            alt="" 
-                            sx={styles.avatar_circle} 
-                        />
+                        {categories.map((item, index) => (
+                            <Avatar 
+                                key={index}
+                                src={pizza} 
+                                alt={item.name} 
+                                sx={styles.avatar_circle} 
+                            />
+                        ))}
                     </div>
                 </Box>
                 <Grid container>
-                    <Grid>
-                        <img src={banner} alt="Banner" id="banner"/>
-                    </Grid>
+                    {banners.map((item, index) => (
+                        <Grid key={index}>
+                            <img src={banner} alt={item.description} id="banner"/>
+                        </Grid>
+                    ))}
                 </Grid>
+
                 <Grid container>
                     <Grid>
                         <h6>Listagem de Produtos</h6>
@@ -81,17 +96,14 @@ function Welcome() {
                 </Grid>
                 
                 <Grid container>
-                    <Grid>
-                        <ListCard 
-                            list={[
-                                { title: "Pizza de Frango", image: '', content: "Frango, Azeitona, Queijo e Catupiry" },
-                                { title: "Pizza Calabresa", image: '', content: "Pizza de Calabresa" },
-                                { title: "Pizza de Atum", image: '', content: "Pizza de Atum" },
-                            ]}
-                        />
+                    <Grid xs={12}>
+                        <ListCard list={products} outra="Teste" />
                     </Grid>
                 </Grid>
-                <Link to="/orders">Carrinho</Link>
+                <Button variant='contained' fullWidth >
+                    <Link to="/orders">Carrinho</Link>
+                </Button>
+                
             </div>
         </CssBaseline>
     );

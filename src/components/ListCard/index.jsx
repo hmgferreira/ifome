@@ -1,11 +1,11 @@
 import { List } from "@mui/material";
 import CardProduct from "../CardProduct";
-function ListCard(props) {
+function ListCard({ list }) {
     return (
         <List>
-           {props.list.map((item, index) => (
-            <CardProduct key={index} title={item.title} src={item.image}>
-                {item.content}
+           {list.map((item, index) => (
+            <CardProduct key={index} title={item.name} src={item.image} price={item.price}>
+                {item.description}
             </CardProduct>
            ))}
         </List>

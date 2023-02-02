@@ -4,6 +4,9 @@ import Orders from '../pages/Orders';
 import Address from '../pages/Address';
 import Payment from '../pages/Payment';
 
+import Categories from '../pages/Admin/Categories';
+import Form from '../pages/Admin/Categories/Form';
+
 function AppRoutes() {
     return (
         <BrowserRouter>
@@ -13,6 +16,10 @@ function AppRoutes() {
                 <Route path="/address" element={<Address />} />
                 <Route path="/payment" element={<Payment />} />
                 <Route path="/finished" element={<Payment />} />
+                
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/categories/new" element={<Form />} />
+                
             </Routes>
         </BrowserRouter>
     );

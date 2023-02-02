@@ -9,6 +9,28 @@
       "id": 2,
       "name": "Sanduiches",
       "image": ""
+    },
+    {
+      "id": 3,
+      "name": "Pastel",
+      "image": ""
+    },
+    {
+      "id": 4,
+      "name": "Pastel",
+      "image": ""
+    }
+  ],
+  "banners": [
+    {
+      "id": 1,
+      "image": "",
+      "description": "Promo Sanduiche"
+    },
+    {
+      "id": 2,
+      "image": "",
+      "description": "Promo Pizza"
     }
   ],
   "products": [
