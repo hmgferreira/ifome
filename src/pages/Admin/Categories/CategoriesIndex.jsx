@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, List, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material';
 import api from '../../../config/api';
 
-function Categories() {
+function CategoriesIndex() {
 
+    const navigate = useNavigate();
     const[categories, setCategories] = useState([]);
 
     async function getCategories() {
         const response = await api.get('categories');
         setCategories(response.data);
+    }
+
+    async function editItem(id) {
+        navigate(`/categories/edit/${id}`)
+        ///categories/edit/1
     }
 
     async function deleteItem(id) {
@@ -29,6 +36,7 @@ function Categories() {
     return (
         <>
             <h6>Categorias</h6>
+            <Link to="/categories/new">Adicionar Categoria</Link>
             <List>
                 {categories.map((item, index) => (
                     <ListItem key={index}>
@@ -37,7 +45,7 @@ function Categories() {
                             {item.name}
                         </ListItemText>
                         <ListItemButton>
-                            <Button>Editar</Button>
+                            <Button onClick={() => editItem(item.id)}>Editar</Button>
                             <Button onClick={() => deleteItem(item.id)}>Excluir</Button>
                         </ListItemButton>
                     </ListItem>
@@ -48,4 +56,4 @@ function Categories() {
     );
 }
 
-export default Categories;
+export default CategoriesIndex;

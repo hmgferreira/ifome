@@ -1,6 +1,9 @@
 import { List } from "@mui/material";
 import CardProduct from "../CardProduct";
 function ListCard({ list }) {
+
+ 
+
     return (
         <List>
            {list.map((item, index) => (

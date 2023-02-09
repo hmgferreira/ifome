@@ -1,10 +1,6 @@
 import { createContext } from "react";
 
-const DadosContext = createContext({
-    payment: null,
-    address: [],
-    products: []
-});
+const DadosContext = createContext();
 
 export default DadosContext;
 

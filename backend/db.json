@@ -16,9 +16,39 @@
       "image": ""
     },
     {
-      "id": 4,
-      "name": "Pastel",
-      "image": ""
+      "name": "Tapiocas",
+      "image": "",
+      "id": 4
+    },
+    {
+      "name": "Tapiocas 2",
+      "image": "",
+      "id": 5
+    },
+    {
+      "name": "Tapiocas 3",
+      "image": "",
+      "id": 6
+    },
+    {
+      "name": "Tapiocas 4",
+      "image": "",
+      "id": 7
+    },
+    {
+      "name": "Calzones",
+      "image": "",
+      "id": 8
+    },
+    {
+      "name": "Esfihas",
+      "image": "",
+      "id": 9
+    },
+    {
+      "name": "teste",
+      "image": "",
+      "id": 10
     }
   ],
   "banners": [
