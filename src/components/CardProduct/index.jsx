@@ -1,5 +1,5 @@
-import { Avatar, ListItem, ListItemAvatar, ListItemText, Grid, Typography } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { Avatar, ListItem, ListItemText, Grid, Typography } from "@mui/material";
+import { useContext, useState } from "react";
 import DadosContext from '../../contexts/DadosContext';
 
 function CardProduct( props ) {
@@ -7,15 +7,13 @@ function CardProduct( props ) {
     const { productsOrders, setProductsOrders } = useContext(DadosContext);
     const [products, setProducts] = useState({})
 
-    function addToCard(array, obj, index) {
+    function addToCard(array, obj) {
         const list = array
         list.push({...obj, qtd: 1})
-        setProductsOrders([...list]);
     }
 
     function increaseQuantity(array, index) {
         ++array[index].qtd
-        console.log('increaseQuantity: ',array[index])
     }
 
     function decreaseQuantity(array, index) {
@@ -29,16 +27,23 @@ function CardProduct( props ) {
         let list = productsOrders
         const cartItem = list.find(itemList => itemList.id === item.id)
         const index = list.findIndex(itemList => itemList.id === item.id)
-        cartItem ? increaseQuantity(list, index) : addToCard(list, item, index)
-        console.log('addProduct: ',list)
-        console.log('products: ', products)
+        cartItem ? increaseQuantity(list, index) : addToCard(list, item)
+        setProductsOrders([...list]);
+        const indeProduct = productsOrders.findIndex(itemList => itemList.id === item.id)
+        setProducts(productsOrders[indeProduct])
+        console.log('AddProducts: ', products)
+        console.log('productsOrders: ', productsOrders)
     }
 
     function removeProduct(item) {
         let list = productsOrders
         const index = list.findIndex(itemList => itemList.id === item.id)
         decreaseQuantity(list, index)
-        console.log(list)
+        setProductsOrders([...list]);
+        const indeProduct = productsOrders.findIndex(itemList => itemList.id === item.id)
+        setProducts(productsOrders[indeProduct])
+        console.log('removeProduct: ', products)
+        console.log('productsOrders: ', productsOrders)
     }
 
     return (
@@ -57,11 +62,10 @@ function CardProduct( props ) {
                     <Typography variant="p">
                         R$ {props.price}
                         <button onClick={() => removeProduct(props)}>-</button>
-                        <span>{props.qtd}</span>
+                        <span>{products.qtd | 0}</span>
                         <button onClick={() => addProduct(props)}>+</button>
                     </Typography>
                 </Grid>
-                {JSON.stringify(productsOrders, null, 2)}
             </Grid>
         </ListItem>
     );
