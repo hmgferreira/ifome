@@ -30,3 +30,9 @@ h1{
     letter-spacing: 3px;
 }
 
+.box-selected {
+    box-shadow: 4px 4px 10px #282828;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+

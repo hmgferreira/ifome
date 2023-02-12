@@ -59,32 +59,36 @@
   ],
   "adress": [
     {
-      "id": 1,  
-      "street": " Henrique Dias ",
+      "id": 1,
+      "street": "Rua Cento Onze",
       "number": "227",
       "neighborhood": "pirambu",
-      "state": "Fortaleza-CE"
+      "state": "Fortaleza-CE",
+      "isDefault": false
     },
     {
       "id": 2,
-      "street": " Henrique Dias ",
+      "street": "Henrique Dias",
       "number": "227",
       "neighborhood": "pirambu",
-      "state": "Fortaleza-CE"
+      "state": "Fortaleza-CE",
+      "isDefault": false
     },
     {
       "id": 3,
-      "street": " Henrique Dias ",
+      "street": "Av. Damas",
       "number": "227",
       "neighborhood": "pirambu",
-      "state": "Fortaleza-CE"
+      "state": "Fortaleza-CE",
+      "isDefault": true
     },
     {
       "id": 4,
-      "street": "Henrique Dias ",
+      "street": "Av. 13 de Maio",
       "number": "227",
-      "neighborhood": "pirambu",
-      "state": "Fortaleza-CE"
+      "neighborhood": "Pirambu",
+      "state": "Fortaleza-CE",
+      "isDefault": false
     }
   ]
 }

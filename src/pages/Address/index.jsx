@@ -5,11 +5,14 @@ import { useContext, useEffect, useState } from "react";
 import './index.css'
 import api from '../../config/api';
 import DadosContext from "../../contexts/DadosContext";
+import AuthContext from "../../contexts/AuthContext";
+
 function Address() {
 
-    const { endreco, setEndereco } = useContext(DadosContext)
-    const[adress, setAdress] = useState([]);
-    const[selectAdress, setSelectAdress] = useState([]);
+    const { logged } = useContext(AuthContext)
+    const { address, setAddress } = useContext(DadosContext)
+    const[list, setList] = useState([]);
+    
     const style = {
         div:{
             display: 'flex',
@@ -39,49 +42,86 @@ function Address() {
         footer:{
             position: "fixed",
             bottom: "0",
-            left: "0"
+            left: "0",
+            width: '100%'
         }
     }
 
-    async function getAdress() {
+    async function getAddress() {
         const response = await api.get('adress');
-        setAdress(response.data);
+        setList(response.data);
     }
 
-   useEffect(() =>{
-    getAdress() 
-   }, [])
+    async function updateAddress(item, isDefault) {
+        await api.put('adress/'+item.id, {
+            ...item,
+            isDefault
+        });
+        // TEM QUE FAZER AS OUTRAS REQUISICOES PARA NEGAR O ISDEFAULT
+    }
 
-   function exibeConsole(endereco){
-    setSelectAdress([...endereco])
-    console.log(selectAdress)
-   }
-  return (
-   
-    <div style={style.div}>
-        <h1 >Meus Endereços</h1>
-        {adress.map((endereco, i) =>(
-            <Box key={i} display="flex" flexDirection="row" className="box" onClick={()=> exibeConsole(endereco)}>
-                    <List style={style.lista} >
-                        <ListItem style={style.listItem} className="boxItem" > 
-                            <LocationOnOutlinedIcon className="box_icon" fontSize="large"/>
-                            <ListItemText primary={(endereco.street + " - " +  endereco.number)} secondary={(endereco.neighborhood + " , " + endereco.state)}/>
-                        </ListItem>
-                    </List>
-            </Box>
-        ))}
+    useEffect(() =>{
+        if(!logged) {
+            getAddress();
+        } else {
+            setList(address);
+        }
+    }, []);
+
+    function exibeConsole(endereco){
         
-        <Button variant="contained" style={style.botao}>
-          Add Endereço
-        </Button>
-       
-        <Button style={style.footer} variant="contained" fullWidth>
-          <Link to="/payment" className="linkBotao">Carrinho</Link>
-        </Button>
-      
-    </div>
-   
-  );
+        if(address.length) {
+            const listaAddress = address.map(item => {
+                if(item.street === endereco.street) {
+                    item.isDefault = true;
+                    updateAddress(item, true);
+                } else {
+                    item.isDefault = false;
+                }
+                return item;
+            });
+            setAddress([...listaAddress])
+        } else {
+            updateAddress(endereco, true);
+        }
+    }
+    
+    return (
+    
+        <div style={style.div}>
+            <h1 >Meus Endereços</h1>
+            {list.map((endereco, i) =>(
+                <Box key={i} 
+                    display="flex" 
+                    flexDirection="row" 
+                    className={`box `}
+                    onClick={()=> exibeConsole(endereco)}>
+                        <List style={style.lista} >
+                            <ListItem style={style.listItem} className={`boxItem ${endereco.isDefault ? 'box-selected' : ''}`}  > 
+                                <LocationOnOutlinedIcon className="box_icon" fontSize="large"/>
+                                <ListItemText primary={(endereco.street + " - " +  endereco.number)} secondary={(endereco.neighborhood + " , " + endereco.state)}/>
+                            </ListItem>
+                        </List>
+                </Box>
+            ))}
+            
+            <Button variant="contained" style={style.botao}>
+                Add Endereço
+            </Button>
+        
+            <div style={style.footer}>
+                <Button variant="contained" fullWidth>
+                    <Link to="/payment" className="linkBotao">Carrinho</Link>
+                </Button>
+                <Button variant="contained" fullWidth>
+                    <Link to="/orders" className="linkBotao">Voltar</Link>
+                </Button>
+            </div>
+            
+        
+        </div>
+    
+    );
 }
 
 export default Address;
