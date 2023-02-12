@@ -34,6 +34,7 @@
       "name": "Pizza de Frango",
       "description": "Frango, Queijo, Tomate",
       "price": 29.99,
+      "qtd": 0,
       "image": "",
       "category_id": 1
     },
@@ -42,6 +43,7 @@
       "name": "Pizza de Bacon",
       "description": "Bacon, Queijo, Tomate",
       "price": 34.99,
+      "qtd": 0,
       "image": "",
       "category_id": 1
     }
