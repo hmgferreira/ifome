@@ -1,7 +1,7 @@
 import { Avatar, ListItem, ListItemText, Grid, Typography, Box} from "@mui/material";
 import { useContext, useState } from "react";
 import DadosContext from '../../contexts/DadosContext';
-import { red, yellow } from '@mui/material/colors'
+import { yellow } from '@mui/material/colors'
 
 function CardProduct( props ) {
 
