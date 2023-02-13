@@ -1,8 +1,23 @@
-import { Avatar, ListItem, ListItemText, Grid, Typography } from "@mui/material";
+import { Avatar, ListItem, ListItemText, Grid, Typography, Box} from "@mui/material";
 import { useContext, useState } from "react";
 import DadosContext from '../../contexts/DadosContext';
+import { red, yellow } from '@mui/material/colors'
 
 function CardProduct( props ) {
+
+    const style = {
+        btn: {
+            border: 'none',
+            backgroundColor: yellow[900],
+            color: '#fff',
+            padding:'6px 10px',
+            borderRadius: '4px',
+            fontWeight: 'bold'
+        },
+        text: {
+            fontWeight: 'bold',
+        }
+    }
 
     const { productsOrders, setProductsOrders } = useContext(DadosContext);
     const [products, setProducts] = useState({})
@@ -45,22 +60,26 @@ function CardProduct( props ) {
     return (
         <ListItem>
             <Grid container>
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <Avatar src={props.image} alt={props.alt} />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={5}>
                     <ListItemText 
                         primary={props.name}
                         secondary={props.children}
                     />
                 </Grid>
-                <Grid item xs={3} style={{ textAlign: 'right' }}>
-                    <Typography variant="p">
+                <Grid item xs={5} display="flex" alignItems="center" justifyContent="center">
+                    <Typography sx={style.text} variant="p">
                         R$ {props.price}
-                        <button onClick={() => removeProduct(props)}>-</button>
-                        <span>{props.qtd || 0}</span>
-                        <button onClick={() => addProduct(props)}>+</button>
                     </Typography>
+                    <Box marginLeft={1}>
+                        <button
+                        style={style.btn}
+                        onClick={() => removeProduct(props)}>-</button>
+                        <span style={{margin: '3px', fontWeight:'bold'}}>{props.qtd || 0}</span>
+                        <button style={style.btn} onClick={() => addProduct(props)}>+</button>
+                    </Box>
                 </Grid>
             </Grid>
         </ListItem>
