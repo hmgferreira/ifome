@@ -31,8 +31,6 @@ function CardProduct( props ) {
         setProductsOrders([...list]);
         const indeProduct = productsOrders.findIndex(itemList => itemList.id === item.id)
         setProducts(productsOrders[indeProduct])
-        console.log('AddProducts: ', products)
-        console.log('productsOrders: ', productsOrders)
     }
 
     function removeProduct(item) {
@@ -42,8 +40,6 @@ function CardProduct( props ) {
         setProductsOrders([...list]);
         const indeProduct = productsOrders.findIndex(itemList => itemList.id === item.id)
         setProducts(productsOrders[indeProduct])
-        console.log('removeProduct: ', products)
-        console.log('productsOrders: ', productsOrders)
     }
 
     return (
