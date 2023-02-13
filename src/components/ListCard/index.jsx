@@ -10,9 +10,10 @@ function ListCard({ list }) {
             <CardProduct
                 key={index}
                 id={item.id}
-                title={item.name}
-                src={item.image}
+                name={item.name}
+                image={item.image}
                 price={item.price}
+                description={item.description}
                 qtd={item.qtd}
             >
                 {item.description}

@@ -50,7 +50,7 @@ function CardProduct( props ) {
                 </Grid>
                 <Grid item xs={6}>
                     <ListItemText 
-                        primary={props.title}
+                        primary={props.name}
                         secondary={props.children}
                     />
                 </Grid>
@@ -58,7 +58,7 @@ function CardProduct( props ) {
                     <Typography variant="p">
                         R$ {props.price}
                         <button onClick={() => removeProduct(props)}>-</button>
-                        <span>{products.qtd | 0}</span>
+                        <span>{props.qtd || 0}</span>
                         <button onClick={() => addProduct(props)}>+</button>
                     </Typography>
                 </Grid>

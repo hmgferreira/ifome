@@ -1,11 +1,6 @@
 {
   "categories": [
     {
-      "id": 1,
-      "name": "Pizzas",
-      "image": ""
-    },
-    {
       "id": 2,
       "name": "Sanduiches",
       "image": ""
@@ -16,39 +11,9 @@
       "image": ""
     },
     {
-      "name": "Tapiocas",
-      "image": "",
-      "id": 4
-    },
-    {
-      "name": "Tapiocas 2",
-      "image": "",
-      "id": 5
-    },
-    {
-      "name": "Tapiocas 3",
-      "image": "",
-      "id": 6
-    },
-    {
-      "name": "Tapiocas 4",
-      "image": "",
-      "id": 7
-    },
-    {
-      "name": "Calzones",
-      "image": "",
-      "id": 8
-    },
-    {
-      "name": "Esfihas",
-      "image": "",
-      "id": 9
-    },
-    {
-      "name": "teste",
-      "image": "",
-      "id": 10
+      "id": 4,
+      "name": "Pastel",
+      "image": ""
     }
   ],
   "banners": [
@@ -90,6 +55,40 @@
       "name": "Admin",
       "login": "admin@admin.com.br",
       "password": "123456"
+    }
+  ],
+  "adress": [
+    {
+      "id": 1,
+      "street": "Rua Cento Onze",
+      "number": "227",
+      "neighborhood": "pirambu",
+      "state": "Fortaleza-CE",
+      "isDefault": false
+    },
+    {
+      "id": 2,
+      "street": "Henrique Dias",
+      "number": "227",
+      "neighborhood": "pirambu",
+      "state": "Fortaleza-CE",
+      "isDefault": false
+    },
+    {
+      "id": 3,
+      "street": "Av. Damas",
+      "number": "227",
+      "neighborhood": "pirambu",
+      "state": "Fortaleza-CE",
+      "isDefault": true
+    },
+    {
+      "id": 4,
+      "street": "Av. 13 de Maio",
+      "number": "227",
+      "neighborhood": "Pirambu",
+      "state": "Fortaleza-CE",
+      "isDefault": false
     }
   ]
 }
