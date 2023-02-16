@@ -18,6 +18,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.7.0",
     "sweetalert2": "^11.7.1",
+    "swiper": "^9.0.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {
