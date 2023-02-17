@@ -3,9 +3,10 @@ import ListCard from '../../components/ListCard';
 import { Link } from 'react-router-dom';
 import pizza from '../../assets/images/pizza.png';
 import { Box } from '@mui/system';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import api from '../../config/api';
 import { useEffect } from 'react';
+import DadosContext from '../../contexts/DadosContext';
 
 import {Slider, Slide} from '../../components/SliderShow'
 import banner from '../../assets/images/banner.jpg'
@@ -14,7 +15,6 @@ import banner3 from '../../assets/images/banner-3.jpg'
 import banner1 from '../../assets/images/banner-1.jpg'
 
 const productImages = [banner1, banner2, banner3, banner]
-
 
 function Welcome() {
     const[categories, setCategories] = useState([]);
@@ -32,6 +32,14 @@ function Welcome() {
         }
     }
 
+    const { productsOrders } = useContext(DadosContext);
+
+    const[search, setSearch] = useState('');
+    const[categories, setCategories] = useState([]);
+    const[banners, setBanners] = useState([]);
+    const[products, setProducts] = useState([]);
+    const[productsDB, setProductsDB] = useState([]);
+    
     const styles = {
         box: {
             width: '100%', 
@@ -57,10 +65,36 @@ function Welcome() {
         setBanners(response.data);
     }
 
-    async function getProducts() {
-        const response = await api.get('products');
-        setProducts(response.data);
+    function updateListProducts() {
+        const lista = productsDB.map(product => {
+            productsOrders.map(productContext => {
+                if(product.id === productContext.id) {
+                    product.qtd = productContext.qtd;
+                }
+            });
+            return product;
+        });
+        setProducts(lista);
     }
+
+    async function getProducts() {
+        const response = await api.get('products', {
+            params: {
+                name_like: search
+            }
+        });
+        setProductsDB(response.data);
+    }
+
+    useEffect(() => {
+        updateListProducts();
+    }, [productsOrders, productsDB]);
+
+    useEffect(() => {
+        if(search === '') {
+            getProducts();
+        }
+    }, [search]);
 
     useEffect(() => {
         getCategories();
@@ -76,16 +110,28 @@ function Welcome() {
                 <Grid container>
                     <Grid item xs={12} md={12}>
                         <h4 className='title'>Seja bem-vindo!</h4>
-                        <TextField 
-                            fullWidth
-                            size='small'
-                            margin='normal'
-                            variant='outlined'
-                            placeholder='Quero comer?'
-                        />
+                        <Grid container spacing={2} style={{ display: 'flex', alignItems: 'center' }}>
+                            <Grid item xs={9} md={9}>
+                                <TextField 
+                                    fullWidth
+                                    size='small'
+                                    margin='normal'
+                                    variant='outlined'
+                                    placeholder='Quero comer?'
+                                    name="pesquisa"
+                                    onChange={e => setSearch(e.target.value)}
+                                />
+                            </Grid>
+                            <Grid item xs={3} md={3}> 
+                                <Button variant="outlined" onClick={() => getProducts()}>Buscar</Button>
+                            </Grid>
+                        </Grid>
+                        
                     </Grid>
+                    
                 </Grid>
                 {/* https://dontpad.com/iw */}
+
                 <Box sx={styles.box}>
                     <div style={{ display: 'flex' }}>
                         {categories.map((item, index) => (
@@ -113,6 +159,30 @@ function Welcome() {
                         }
                     </Slider>
                 </Grid>
+
+                {!search ?
+                    <>
+                        <Box sx={styles.box}>
+                            <div style={{ display: 'flex' }}>
+                                {categories.map((item, index) => (
+                                    <Avatar 
+                                        key={index}
+                                        src={pizza} 
+                                        alt={item.name} 
+                                        sx={styles.avatar_circle} 
+                                    />
+                                ))}
+                            </div>
+                        </Box>
+                        <Grid container>
+                            {banners.map((item, index) => (
+                                <Grid key={index}>
+                                    <img src={banner} alt={item.description} id="banner"/>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </>
+                : null}
 
                 <Grid container>
                     <Grid>
