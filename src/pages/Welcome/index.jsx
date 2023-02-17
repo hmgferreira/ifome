@@ -12,7 +12,26 @@ import api from '../../config/api';
 import { useEffect } from 'react';
 import DadosContext from '../../contexts/DadosContext';
 
+import {Slider, Slide} from '../../components/SliderShow'
+import banner from '../../assets/images/banner.jpg'
+import banner2 from '../../assets/images/banner-2.jpg'
+import banner3 from '../../assets/images/banner-3.jpg'
+import banner1 from '../../assets/images/banner-1.jpg'
+
+const productImages = [banner1, banner2, banner3, banner]
+
 function Welcome() {
+
+    const settings = {
+        spaceBetween: 5,
+        slidesPerView: 1,
+        navigation: false,
+        draggable: true,
+        loop: false,
+        pagination: {
+            clickable: true
+        }
+    }
 
     const { productsOrders } = useContext(DadosContext);
 
@@ -132,6 +151,35 @@ function Welcome() {
                     
                 </Grid>
                 {/* https://dontpad.com/iw */}
+
+                <Box sx={styles.box}>
+                    <div style={{ display: 'flex' }}>
+                        {categories.map((item, index) => (
+                            <Avatar 
+                                key={index}
+                                src={pizza} 
+                                alt={item.name} 
+                                sx={styles.avatar_circle} 
+                            />
+                        ))}
+                    </div>
+                </Box>
+                <Grid container>
+                    <Typography sx={{fontSize:'1.25rem', lineHeight:'1.625rem', padding:'20px 0', color:'#1a1a1a' }} variant="h4" gutterBottom>
+                        As melhores ofertas
+                    </Typography>
+                    <Slider settings={settings}>
+                        {
+                            productImages.map((item, index) => (
+                                <Slide key={index}>
+                                    
+                                    <img src={item} alt="" />
+                                </Slide>
+                            ))
+                        }
+                    </Slider>
+                </Grid>
+
                 {!search ?
                     <>
                         <Box sx={styles.box}>
