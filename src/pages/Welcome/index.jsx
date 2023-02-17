@@ -1,11 +1,10 @@
-import { Avatar, Button, CssBaseline, Grid, TextField, IconButton } from '@mui/material';
+import { Avatar, Button, CssBaseline, Grid, TextField, IconButton, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 
 import ListCard from '../../components/ListCard';
 import { Link } from 'react-router-dom';
 import pizza from '../../assets/images/pizza.png';
-import banner from '../../assets/images/banner.jpg';
 import { Box } from '@mui/system';
 import { useContext, useState } from 'react';
 import api from '../../config/api';
@@ -152,33 +151,7 @@ function Welcome() {
                 </Grid>
                 {/* https://dontpad.com/iw */}
 
-                <Box sx={styles.box}>
-                    <div style={{ display: 'flex' }}>
-                        {categories.map((item, index) => (
-                            <Avatar 
-                                key={index}
-                                src={pizza} 
-                                alt={item.name} 
-                                sx={styles.avatar_circle} 
-                            />
-                        ))}
-                    </div>
-                </Box>
-                <Grid container>
-                    <Typography sx={{fontSize:'1.25rem', lineHeight:'1.625rem', padding:'20px 0', color:'#1a1a1a' }} variant="h4" gutterBottom>
-                        As melhores ofertas
-                    </Typography>
-                    <Slider settings={settings}>
-                        {
-                            productImages.map((item, index) => (
-                                <Slide key={index}>
-                                    
-                                    <img src={item} alt="" />
-                                </Slide>
-                            ))
-                        }
-                    </Slider>
-                </Grid>
+                
 
                 {!search ?
                     <>
@@ -195,11 +168,19 @@ function Welcome() {
                             </div>
                         </Box>
                         <Grid container>
-                            {banners.map((item, index) => (
-                                <Grid key={index}>
-                                    <img src={banner} alt={item.description} id="banner"/>
-                                </Grid>
-                            ))}
+                            <Typography sx={{fontSize:'1.25rem', lineHeight:'1.625rem', padding:'20px 0', color:'#1a1a1a' }} variant="h4" gutterBottom>
+                                As melhores ofertas
+                            </Typography>
+                            <Slider settings={settings}>
+                                {
+                                    productImages.map((item, index) => (
+                                        <Slide key={index}>
+                                            
+                                            <img src={item} alt="" />
+                                        </Slide>
+                                    ))
+                                }
+                            </Slider>
                         </Grid>
                     </>
                 : null}
