@@ -9,6 +9,8 @@ import CategoriesForm from '../pages/Admin/Categories/CategoriesForm';
 import RoutePrivate from './RoutePrivate';
 import Login from '../pages/Login';
 import Topbar from '../layouts/Topbar';
+import {ThemeProvider} from '@mui/material'
+import { ThemeDefault } from '../themes';
 
 function AppRoutes() {
 
@@ -31,45 +33,47 @@ function AppRoutes() {
     ];
 
     return (
-        <BrowserRouter>
-            <Topbar />
-            <Routes>
-                {/* {routes.map((item) => (
-                    <Route 
-                        path={item.path} 
-                        element={
-                            <RoutePrivate isPrivate={item.isPrivate}>
-                                {item.component}
-                            </RoutePrivate>
-                        }
-                    />
-                ))} */}
+        <ThemeProvider theme={ThemeDefault}>
+            <BrowserRouter>
+                <Topbar />
+                <Routes>
+                    {/* {routes.map((item) => (
+                        <Route 
+                            path={item.path} 
+                            element={
+                                <RoutePrivate isPrivate={item.isPrivate}>
+                                    {item.component}
+                                </RoutePrivate>
+                            }
+                        />
+                    ))} */}
 
-                <Route path="/" element={<Welcome />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/address" element={<Address />} />
-                <Route path="/payment" element={<Payment />} />
-                <Route path="/finished" element={<Payment />} />
-                
-                <Route path="/login" element={<Login />} />
-                <Route path="/categories" element={
-                    <RoutePrivate>
-                        <CategoriesIndex />
-                    </RoutePrivate>
-                } />
-                <Route path="/categories/new" element={
-                    <RoutePrivate>
-                        <CategoriesForm />
-                    </RoutePrivate>
-                } />
-                <Route path="/categories/edit/:id" element={
-                    <RoutePrivate>
-                        <CategoriesForm />
-                    </RoutePrivate>
-                } />
-                
-            </Routes>
-        </BrowserRouter>
+                    <Route path="/" element={<Welcome />} />
+                    <Route path="/orders" element={<Orders />} />
+                    <Route path="/address" element={<Address />} />
+                    <Route path="/payment" element={<Payment />} />
+                    <Route path="/finished" element={<Payment />} />
+                    
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/categories" element={
+                        <RoutePrivate>
+                            <CategoriesIndex />
+                        </RoutePrivate>
+                    } />
+                    <Route path="/categories/new" element={
+                        <RoutePrivate>
+                            <CategoriesForm />
+                        </RoutePrivate>
+                    } />
+                    <Route path="/categories/edit/:id" element={
+                        <RoutePrivate>
+                            <CategoriesForm />
+                        </RoutePrivate>
+                    } />
+                    
+                </Routes>
+            </BrowserRouter>
+        </ThemeProvider>
     );
 }
 

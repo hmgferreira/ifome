@@ -1,21 +1,41 @@
-import { Avatar, Button, CssBaseline, Grid, TextField } from '@mui/material';
+import { Avatar, Button, CssBaseline, Grid, TextField, IconButton, Typography } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge from '@mui/material/Badge';
+
 import ListCard from '../../components/ListCard';
 import { Link } from 'react-router-dom';
 import pizza from '../../assets/images/pizza.png';
-import pastel from '../../assets/images/pastel.png';
-import hamburguer from '../../assets/images/hamburguer.png';
-import banner from '../../assets/images/banner.jpg';
 import { Box } from '@mui/system';
 import { useContext, useState } from 'react';
 import api from '../../config/api';
 import { useEffect } from 'react';
 import DadosContext from '../../contexts/DadosContext';
 
+import {Slider, Slide} from '../../components/SliderShow'
+import banner from '../../assets/images/banner.jpg'
+import banner2 from '../../assets/images/banner-2.jpg'
+import banner3 from '../../assets/images/banner-3.jpg'
+import banner1 from '../../assets/images/banner-1.jpg'
+
+const productImages = [banner1, banner2, banner3, banner]
+
 function Welcome() {
+
+    const settings = {
+        spaceBetween: 5,
+        slidesPerView: 1,
+        navigation: false,
+        draggable: true,
+        loop: false,
+        pagination: {
+            clickable: true
+        }
+    }
 
     const { productsOrders } = useContext(DadosContext);
 
     const[search, setSearch] = useState('');
+    const [count, setCount] = useState(0)
     const[categories, setCategories] = useState([]);
     const[banners, setBanners] = useState([]);
     const[products, setProducts] = useState([]);
@@ -65,10 +85,21 @@ function Welcome() {
             }
         });
         setProductsDB(response.data);
+
+    }
+
+     function getCountCart() {
+        if(productsOrders.length) {
+            let resp = productsOrders.map(item => {
+                return item.qtd
+            }).reduce((acc, currentValue) => acc + currentValue, 0)
+            setCount(resp)
+        }
     }
 
     useEffect(() => {
         updateListProducts();
+        getCountCart()
     }, [productsOrders, productsDB]);
 
     useEffect(() => {
@@ -88,7 +119,7 @@ function Welcome() {
         <CssBaseline>
             <div style={{ padding: '20px' }}>
                 
-                <Grid container>
+                <Grid container style={{position:'relative'}}>
                     <Grid item xs={12} md={12}>
                         <h4 className='title'>Seja bem-vindo!</h4>
                         <Grid container spacing={2} style={{ display: 'flex', alignItems: 'center' }}>
@@ -109,9 +140,19 @@ function Welcome() {
                         </Grid>
                         
                     </Grid>
+                    <Link to="/orders" style={{position:'absolute', top:'-30px', right:'-20px'}}>
+                    <IconButton color='primary' sx={{m:2}} size="large">
+                        <Badge badgeContent={count} color="primary">
+                            <ShoppingCartIcon fontSize='large'/>
+                        </Badge>
+                    </IconButton>
+                </Link>
                     
                 </Grid>
                 {/* https://dontpad.com/iw */}
+
+                
+
                 {!search ?
                     <>
                         <Box sx={styles.box}>
@@ -127,11 +168,19 @@ function Welcome() {
                             </div>
                         </Box>
                         <Grid container>
-                            {banners.map((item, index) => (
-                                <Grid key={index}>
-                                    <img src={banner} alt={item.description} id="banner"/>
-                                </Grid>
-                            ))}
+                            <Typography sx={{fontSize:'1.25rem', lineHeight:'1.625rem', padding:'20px 0', color:'#1a1a1a' }} variant="h4" gutterBottom>
+                                As melhores ofertas
+                            </Typography>
+                            <Slider settings={settings}>
+                                {
+                                    productImages.map((item, index) => (
+                                        <Slide key={index}>
+                                            
+                                            <img src={item} alt="" />
+                                        </Slide>
+                                    ))
+                                }
+                            </Slider>
                         </Grid>
                     </>
                 : null}
@@ -144,13 +193,9 @@ function Welcome() {
                 
                 <Grid container>
                     <Grid xs={12}>
-                        <ListCard list={products} outra="Teste" />
+                        <ListCard list={products} />
                     </Grid>
                 </Grid>
-                <Button variant='contained' fullWidth >
-                    <Link to="/orders">Carrinho</Link>
-                </Button>
-                
             </div>
         </CssBaseline>
     );
